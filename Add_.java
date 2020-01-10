@@ -41,14 +41,7 @@ class Solution2 {
                 return max;
             }
         }
-        
-//   aelpp
-//   aepr
-//   chars[a-a] -> 1 -> 0
-//   chars[e-a] -> 1 -> 0
-//   chars[l-a] -> 1
-//   chars[p-a] -> 2 -> 1
-//   chars[r-a] -> -1
+        //Count Number of different characters that need to be altered (-1 or 1)
   
         for (int i = 0; i < t1.length; i++)  
             chars[t1[i] - 'a']++;  
