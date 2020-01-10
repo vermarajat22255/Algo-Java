@@ -73,3 +73,56 @@ static int total =0;
         scanner.close();
     }
 }
+___________________________________________________________TRY 2__________________________________________________________
+    
+     static int total =0;
+    static HashMap<String,Integer> hm = new HashMap();
+    static String glo;
+    // Complete the sherlockAndAnagrams function below.
+
+    static int sherlockAndAnagrams(String s) {
+        ArrayList<String> al = new ArrayList<String>();
+        total =0;
+        glo =s;
+        if(hm.containsKey(s)) return hm.get(s);
+        //System.out.println(hm);
+        for(int i=0;i<s.length();i++){
+           for(int j=i+1;j<=s.length();j++){
+               al.add(s.substring(i,j));
+            } 
+        }
+        total = checkAnagrams(al);
+        
+        return total;
+    }
+    static int checkAnagrams(ArrayList al){
+        String a ="";
+        String b ="";
+        for(int i=0;i<al.size();i++){
+            for(int j=i+1;j<al.size();j++){
+                a = (String)al.get(i);
+                b = (String)al.get(j);
+
+                if(a.length() == b.length()){
+                    char a1[] = new char[a.length()];
+                    char a2[] = new char[b.length()];
+                    a1 = a.toCharArray();
+                    a2 = b.toCharArray();
+                    
+                    Arrays.sort(a1);
+                    Arrays.sort(a2);
+                    
+                    a = Arrays.toString(a1);
+                    b = Arrays.toString(a2);
+
+                    if(a.equalsIgnoreCase(b)){
+                        total++;
+                    }
+                }
+            }
+        }
+        if(!hm.containsKey(a)){
+            hm.put(glo,total);
+        }
+        return total;
+    }
