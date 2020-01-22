@@ -36,3 +36,27 @@ static long arrayManipulation(int n, int[][] queries) {
         return max;
     }
 }
+//_______________________________________________________Attempt 2 same array size___________________________________
+
+    static long arrayManipulation(int n, int[][] queries) {
+        long arr[] = new long[n];
+        
+        for(int i=0;i<n;i++){
+            arr[i] = 0;
+        }
+        for(int i=0;i<queries.length;i++){
+            int a = queries[i][0]-1;
+            int b = queries[i][1]-1;
+            int k = queries[i][2];
+            
+            arr[a] = arr[a]+k;
+            if(b+1 < n )
+            arr[b+1] = arr[b+1]-k;
+        }
+        long max=arr[0];
+        for(int i=1;i<arr.length;i++){
+            arr[i]+=arr[i-1] ;
+            if(max<arr[i]) max = arr[i]; 
+        }
+        return max;
+    }
