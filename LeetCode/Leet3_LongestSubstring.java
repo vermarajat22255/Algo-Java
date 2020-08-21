@@ -1,50 +1,57 @@
+import java.util.HashSet;
 
 public class Leet3_LongestSubstring {
-    public int lengthOfLongestSubstring(String s) {
-
-        if (s == null || s.length() == 0)
-            return 0;
-        if (s.length() == 1)
-            return 1;
-
-        HashMap<Character, Integer> hm = new HashMap<>();
-        int maxLen = 0, len = 0;
-
-        for (int i = 0; i < s.length(); i++) {
-
-            char ch = s.charAt(i);
-
-            System.out.println(ch);
-
-            if (hm.containsKey(ch)) {
-                hm.clear();
-                if (len > maxLen)
-                    maxLen = len;
-
-                len = 0;
+    class Solution {
+        public int lengthOfLongestSubstring(String s) {
+       
+            // O(n^2)
+        
+            if(s.length() == 0 || s.length() == 1) return s.length();
+            
+    //         int Maxlen=0, len=0;
+    //         for(int i=0; i< s.length(); i++){
+    //           Maxlen = Math.max(lenString(s.substring(i, s.length())), Maxlen);      
+    //         }
+                    
+    //         return Maxlen;
+    //     }
+        
+    //     int lenString(String s){
+    //         int len =0;
+    //         HashMap<Character, Integer> hm = new HashMap<>();
+    //         for(int i=0; i<s.length(); i++){
+                
+    //             char ch = s.charAt(i);
+                
+    //             if(hm.containsKey(ch)){
+    //                 return len;
+    //             }
+    //             len++;
+    //             hm.put(ch, i);
+    //         }
+    //         return len;
+    //     }
+            
+            //O(n)
+            // pewwkew
+            //start with left and right being equal slide right until end
+            // if char repeats increase the left pointer by one else move right to the end
+            
+            int i=0, j=0, maxLen =0;
+            int n = s.length();
+            HashSet<Character> hm = new HashSet<>();
+            while(i < n  && j <  n){
+                char ch = s.charAt(j);
+                if(hm.contains(ch)){
+                    maxLen = Math.max(maxLen, j-i);
+                    hm.remove(s.charAt(i));
+                    i++;
+                }else{
+                    hm.add(ch);
+                    j++;
+                }
             }
-            hm.put(ch, 1);
-            len++;
-        }
-        maxLen = maxLen > len ? maxLen : len;
-
-        for (int i = s.length() - 1; i >= 0; i--) {
-
-            char ch = s.charAt(i);
-
-            System.out.println(ch);
-
-            if (hm.containsKey(ch)) {
-                hm.clear();
-                if (len > maxLen)
-                    maxLen = len;
-                len = 0;
-            }
-            hm.put(ch, 1);
-            len++;
-        }
-
-        return maxLen > len ? maxLen : len;
-    }
+            return maxLen > j-i ? maxLen : j-i;
+    }}
 
 }
