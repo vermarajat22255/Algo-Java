@@ -23,3 +23,21 @@ class Solution {
         return i;
     }
 }
+class Solution {
+    public int reverse(int x) {
+        if(x == 0) return x;
+        
+        String rev = reverseNum(x);
+        try{
+            return Integer.parseInt(rev);
+        }
+        catch(Exception e){
+            return 0;            
+        }
+
+    }
+    String reverseNum(int x){
+        if(x > 0 ) return new StringBuilder(x+"").reverse().toString();
+        return "-"+(new StringBuilder((x+"").substring(1)).reverse().toString());
+    }
+}
