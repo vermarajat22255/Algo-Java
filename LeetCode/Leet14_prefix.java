@@ -22,3 +22,28 @@ class Solution {
         return com.substring(0, i);
     }
 }
+
+// Attempt 2 nice work
+class Solution {
+    public String longestCommonPrefix(String[] strs) {
+        if(strs.length == 0) return "";
+        if(strs.length == 1) return strs[0];
+        
+        Arrays.sort(strs);
+
+        String prefix = strs[0];
+        int i =0, j=1;
+        while(j < strs.length){
+            i=0;
+            while(i < prefix.length()){
+                if(prefix.charAt(i) != strs[j].charAt(i)){
+                    prefix = prefix.substring(0, i);
+                    break;
+                }
+                i++;
+            }
+            j++;
+        }
+        return prefix;
+    }
+}
