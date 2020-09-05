@@ -39,3 +39,36 @@ public class Leet8_Atoi {
         return 0;
     }
 }
+
+///
+import java.util.regex.Pattern;
+class Solution {
+    public int myAtoi(String str) {
+        str = str.trim();
+        if(str.length() == 0) return 0;
+        boolean isNeg = false;
+        Pattern p = Pattern.compile("^\\d");
+        
+        if(str.charAt(0) == '+' || str.charAt(0) == '-'){
+            
+            if(str.charAt(0) == '-') isNeg =true;
+            str = str.substring(1, str.length());
+            if(str.length() == 0 || !p.matcher(str.charAt(0)+"").matches()) return 0;
+        
+        }else if( !p.matcher(str.charAt(0)+"").matches()) 
+            return 0;
+        
+        int i=0;
+        String res = "";
+        while(i<str.length() && p.matcher(str.charAt(i)+"").matches()){
+            res = res+str.charAt(i)+"";
+            i++;
+        }
+        try{
+            return isNeg ? Integer.parseInt("-"+res) : Integer.parseInt(res);
+        }catch(Exception e){
+            if(isNeg) return Integer.MIN_VALUE;
+            else return Integer.MAX_VALUE;
+        }
+    }
+}
